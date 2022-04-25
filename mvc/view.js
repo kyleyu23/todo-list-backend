@@ -4,9 +4,11 @@ export const View = (() => {
     input: ".todo-input",
     submit: ".todo-button",
     pending: ".pending",
+    completed: ".completed",
     editbutton: ".edit-button",
     deletebutton: ".delete-button",
     togglebutton: ".toggle-button",
+    content: ".content-container",
   };
 
   const render = (ele, tmp) => {
@@ -21,7 +23,7 @@ export const View = (() => {
           <div class="todo-item">
             <li class="todo-title">${todo.content}</li>
             <li class="edit-button">Edit</li>
-            <li class="delete-button">Delete</li>
+            <li class="delete-button ${todo.id}">Delete</li>
             <li class="toggle-button">Toggle</li>
           </div>
         `;

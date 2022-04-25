@@ -6,8 +6,14 @@ export const Controller = ((model, view) => {
   const state = new model.State();
 
   const init = () => {
-    model.getTodos().then((todolist) => {
-      state.todolist = todolist.reverse();
+    model.getTodos().then((todos) => {
+      todos.forEach((todo) => {
+        if (todo.isCompleted) {
+          state.completedlist = [...state.completedlist, todo];
+        } else {
+          state.pendinglist = [...state.pendinglist, todo];
+        }
+      });
     });
   };
 
@@ -21,7 +27,11 @@ export const Controller = ((model, view) => {
 
       const newtodo = new model.Todo(inputBox.value);
       model.addTodo(newtodo).then((todo) => {
-        state.todolist = [todo, ...state.todolist];
+        if (todo.isCompleted) {
+          state.completedlist = [...state.completedlist, todo];
+        } else {
+          state.pendinglist = [...state.pendinglist, todo];
+        }
       });
 
       inputBox.value = "";
@@ -29,17 +39,35 @@ export const Controller = ((model, view) => {
   };
 
   const deleteTodo = () => {
-    const todolistEle = document.querySelector(view.domstr.todolist);
-    todolistEle.addEventListener("click", (event) => {
+    const pendingEle = document.querySelector(view.domstr.pending);
+    pendingEle.addEventListener("click", (event) => {
       const [className, id] = event.target.className.split(" ");
-      state.todolist = state.todolist.filter((todo) => +todo.id !== +id);
-      model.deleteTodo(id);
+      const deleteClassName = view.domstr.deletebutton.slice(1);
+      if (className === deleteClassName) {
+        state.pendinglist = state.pendinglist.filter(
+          (todo) => +todo.id !== +id
+        );
+        model.deleteTodo(id);
+      }
+    });
+
+    const completedEle = document.querySelector(view.domstr.completed);
+    completedEle.addEventListener("click", (event) => {
+      const [className, id] = event.target.className.split(" ");
+      const deleteClassName = view.domstr.deletebutton.slice(1);
+      if (className === deleteClassName) {
+        state.completedlist = state.completedlist.filter(
+          (todo) => +todo.id !== +id
+        );
+        model.deleteTodo(id);
+      }
     });
   };
 
   const bootstrap = () => {
     init();
     addTodo();
+    deleteTodo();
   };
 
   return { bootstrap };
