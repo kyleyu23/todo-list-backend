@@ -40,6 +40,8 @@ form button {
   width: 50%;
   list-style: none;
   display: flex;
+  margin-bottom: 10px;
+  margin-right: 10px;
 }
 .todo-title {
   width: 100%;
