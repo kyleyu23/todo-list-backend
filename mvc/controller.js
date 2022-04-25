@@ -63,11 +63,33 @@ export const Controller = ((model, view) => {
       }
     });
   };
+  const toggleTodo = () => {
+    const contentEle = document.querySelector(view.domstr.content);
+    contentEle.addEventListener("click", (event) => {
+      const [className, id] = event.target.className.split(" ");
+      const toggleClassName = view.domstr.togglebutton.slice(1);
+      // console.log([className, id]);
+      if (className === toggleClassName) {
+        model.getTodos().then((todos) => {
+          todos.forEach((todo) => {
+            if (+todo.id === +id) {
+              console.log("before", todo);
+              todo.isCompleted = !todo.isCompleted;
+              console.log("after", todo);
+            }
+          });
+        });
+
+        model.updateTodo(id);
+      }
+    });
+  };
 
   const bootstrap = () => {
     init();
     addTodo();
     deleteTodo();
+    toggleTodo();
   };
 
   return { bootstrap };

@@ -24,7 +24,7 @@ export const View = (() => {
             <li class="todo-title">${todo.content}</li>
             <li class="edit-button">Edit</li>
             <li class="delete-button ${todo.id}">Delete</li>
-            <li class="toggle-button">Toggle</li>
+            <li class="toggle-button ${todo.id}">Toggle</li>
           </div>
         `;
     });

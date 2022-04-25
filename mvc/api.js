@@ -18,10 +18,14 @@ export const Api = (() => {
         "Content-type": "application/json; charset=UTF-8",
       },
     }).then((response) => response.json());
-
+  const updateTodo = (id) =>
+    fetch([baseUrl, path, id].join("/"), {
+      method: "PUT",
+    });
   return {
     getTodos,
     deleteTodo,
     addTodo,
+    updateTodo,
   };
 })();
