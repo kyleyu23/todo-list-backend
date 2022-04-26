@@ -23,7 +23,7 @@ form button {
   background: white;
 }
 .content-container {
-  /* border: 1px green solid; */
+  border: 1px green solid;
 
   width: 100%;
   height: 100%;
@@ -34,7 +34,7 @@ form button {
   flex-direction: row;
 }
 .inner-container {
-  /* border: 1px red solid; */
+  border: 1px red solid;
 }
 
 .todo-item {
@@ -46,9 +46,11 @@ form button {
 }
 .todo-title {
   width: 100%;
-  font-size: 1rem;
+  font-size: 2rem;
   display: flex;
 }
 .todo-item svg {
-  width: 50%;
+  border: 1px purple solid;
+  width: 36px;
+  fill: white;
 }

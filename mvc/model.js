@@ -8,34 +8,42 @@ export const Model = ((api, view) => {
       this.userId = 3;
       this.content = content;
       this.isCompleted = false;
+      this.isEditing = false;
     }
   }
 
   class State {
-    #pendinglist = [];
+    #todos = [];
 
-    get pendinglist() {
-      return this.#pendinglist;
+    get todos() {
+      return this.#todos;
     }
 
-    set pendinglist(newpendinglist) {
-      this.#pendinglist = newpendinglist;
-      const pendinglistEle = document.querySelector(view.domstr.pending);
-      const tmp = view.createTmp(this.pendinglist);
-      view.render(pendinglistEle, tmp);
-    }
+    set todos(newtodos) {
+      this.#todos = newtodos;
 
-    #completedlist = [];
+      const pendingEle = document.querySelector(view.domstr.pending);
+      const completedEle = document.querySelector(view.domstr.completed);
 
-    get completedlist() {
-      return this.#completedlist;
-    }
+      let completedTodos = [];
+      let pendingTodos = [];
 
-    set completedlist(newcompletedlist) {
-      this.#completedlist = newcompletedlist;
-      const completedlistEle = document.querySelector(view.domstr.completed);
-      const tmp = view.createTmp(this.completedlist);
-      view.render(completedlistEle, tmp);
+      newtodos.forEach((todo) => {
+        if (todo.isCompleted) {
+          completedTodos.push(todo);
+        } else {
+          pendingTodos.push(todo);
+        }
+      });
+
+      const pendingTmp = view.createTmp(pendingTodos);
+      view.render(pendingEle, pendingTmp);
+
+      const completedTmp = view.createTmp(completedTodos);
+      view.render(completedEle, completedTmp);
+
+      // const tmp = view.createTmp(this.todos);
+      // view.render(todosEle, tmp);
     }
   }
 

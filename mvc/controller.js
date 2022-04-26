@@ -7,13 +7,7 @@ export const Controller = ((model, view) => {
 
   const init = () => {
     model.getTodos().then((todos) => {
-      todos.forEach((todo) => {
-        if (todo.isCompleted) {
-          state.completedlist = [...state.completedlist, todo];
-        } else {
-          state.pendinglist = [...state.pendinglist, todo];
-        }
-      });
+      state.todos = todos;
     });
   };
 
@@ -68,22 +62,18 @@ export const Controller = ((model, view) => {
     contentEle.addEventListener("click", (event) => {
       const [className, id] = event.target.className.split(" ");
       const toggleClassName = view.domstr.togglebutton.slice(1);
-      // console.log([className, id]);
       if (className === toggleClassName) {
         model.getTodos().then((todos) => {
-          todos.forEach((todo) => {
-            if (+todo.id === +id) {
-              console.log("before", todo);
-              todo.isCompleted = !todo.isCompleted;
-              console.log("after", todo);
-            }
-          });
+          const todoToUpdate = todos.find((todo) => +todo.id === +id);
+          todoToUpdate.isCompleted = !todoToUpdate.isCompleted;
+          state.todos = todos;
+          return model.updateTodo(id, todoToUpdate);
         });
-
-        model.updateTodo(id);
       }
     });
   };
+
+  const editTodo = () => {};
 
   const bootstrap = () => {
     init();

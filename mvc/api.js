@@ -18,9 +18,13 @@ export const Api = (() => {
         "Content-type": "application/json; charset=UTF-8",
       },
     }).then((response) => response.json());
-  const updateTodo = (id) =>
+  const updateTodo = (id, data) =>
     fetch([baseUrl, path, id].join("/"), {
       method: "PUT",
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+      body: JSON.stringify(data),
     });
   return {
     getTodos,
