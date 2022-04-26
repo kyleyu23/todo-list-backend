@@ -21,13 +21,14 @@ export const Controller = ((model, view) => {
       if (!inputBox.value) return;
 
       const newtodo = new model.Todo(inputBox.value);
-      //update backend
-      model.addTodo(newtodo).then((todo) => {
-        //re-render backend
-        state.todos = [...state.todos, todo];
-      });
 
       inputBox.value = "";
+
+      //update backend
+      model.addTodo(newtodo).then((todo) => {
+        //re-render
+        state.todos = [...state.todos, todo];
+      });
     });
   };
 
@@ -44,6 +45,7 @@ export const Controller = ((model, view) => {
       }
     });
   };
+
   const toggleTodo = () => {
     const contentEle = document.querySelector(view.domstr.content);
     contentEle.addEventListener("click", (event) => {
@@ -53,10 +55,10 @@ export const Controller = ((model, view) => {
         model.getTodos().then((todos) => {
           const todoToUpdate = todos.find((todo) => +todo.id === +id);
           todoToUpdate.isCompleted = !todoToUpdate.isCompleted;
-          //re-render
-          state.todos = todos;
           //update backend
           model.updateTodo(id, todoToUpdate);
+          //re-render
+          state.todos = todos;
         });
       }
     });
