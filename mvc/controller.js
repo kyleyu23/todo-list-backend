@@ -35,40 +35,34 @@ export const Controller = ((model, view) => {
   const deleteTodo = () => {
     const contentEle = document.querySelector(view.domstr.content);
     contentEle.addEventListener("click", (event) => {
-      const [className, id] = event.target.className.split(" ");
-      const deleteClassName = view.domstr.deletebutton.slice(1);
-      if (className === deleteClassName) {
-        //update backend
-        model.deleteTodo(id);
-        //re-render
-        state.todos = state.todos.filter((todo) => +todo.id !== +id);
-      }
+      const targetElement = event.target.closest(view.domstr.deletebutton);
+      if (!targetElement) return;
+
+      const [className, id] = targetElement.className.split(" ");
+      //update backend
+      model.deleteTodo(id);
+      //re-render
+      state.todos = state.todos.filter((todo) => +todo.id !== +id);
     });
   };
 
   const toggleTodo = () => {
     const contentEle = document.querySelector(view.domstr.content);
     contentEle.addEventListener("click", (event) => {
-      // traverses the Element and its parents until it finds a node that matches the provided selector string
-      const targetElement = event.target.closest(".toggle-button");
+      const targetElement = event.target.closest(view.domstr.togglebutton);
 
       if (!targetElement) return;
 
       const [className, id] = targetElement.className.split(" ");
-      const toggleClassName = view.domstr.togglebutton.slice(1);
 
-      if (className === toggleClassName) {
-        model.getTodos().then((todos) => {
-          const todoToUpdate = todos.find((todo) => +todo.id === +id);
-          todoToUpdate.isCompleted = !todoToUpdate.isCompleted;
-
-          // return;
-          //update backend
-          model.updateTodo(id, todoToUpdate);
-          //re-render
-          state.todos = todos;
-        });
-      }
+      model.getTodos().then((todos) => {
+        const todoToUpdate = todos.find((todo) => +todo.id === +id);
+        todoToUpdate.isCompleted = !todoToUpdate.isCompleted;
+        //update backend
+        model.updateTodo(id, todoToUpdate);
+        //re-render
+        state.todos = todos;
+      });
     });
   };
 
@@ -79,7 +73,7 @@ export const Controller = ((model, view) => {
   const bootstrap = () => {
     init();
     addTodo();
-    // deleteTodo();
+    deleteTodo();
     toggleTodo();
   };
 
