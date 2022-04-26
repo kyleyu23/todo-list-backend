@@ -66,15 +66,38 @@ export const Controller = ((model, view) => {
     });
   };
 
-  //UTILITY FUNCTIONS
+  const editTodo = () => {
+    const contentEle = document.querySelector(view.domstr.content);
+    contentEle.addEventListener("click", (event) => {
+      const buttonEle = event.target.closest(view.domstr.editbutton);
+      if (!buttonEle) return;
 
-  const editTodo = () => {};
+      const titleEle = buttonEle.previousElementSibling;
+      const [className, id] = buttonEle.className.split(" ");
+
+      //update state
+      let newtodos = [...state.todos];
+
+      const todoToUpdate = newtodos.find((todo) => +todo.id === +id);
+      todoToUpdate.isEditing = !todoToUpdate.isEditing;
+      todoToUpdate.content = titleEle.textContent;
+
+      state.todos = newtodos;
+
+      //update backend
+      model.updateTodo(id, todoToUpdate);
+    });
+  };
+
+  //UTILITY FUNCTIONS
+  //TODO function to add eventlistener with params 1)view.domstr.class 2)callback
 
   const bootstrap = () => {
     init();
     addTodo();
     deleteTodo();
     toggleTodo();
+    editTodo();
   };
 
   return { bootstrap };

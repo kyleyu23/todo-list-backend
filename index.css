@@ -104,6 +104,11 @@ button,
 .todo-item,
 .edit-button,
 .delete-button,
-.toggle-button {
+.toggle-button,
+.todo-title[contenteditable="true"] {
   border-radius: 0.4rem;
+}
+.todo-title[contenteditable="true"] {
+  border: 1px black solid;
+  cursor: pointer;
 }

@@ -9,6 +9,7 @@ export const View = (() => {
     deletebutton: ".delete-button",
     togglebutton: ".toggle-button",
     content: ".content-container",
+    title: ".todo-title",
   };
 
   const rightArrow = `<svg focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ArrowForwardIcon" aria-label="fontSize small"><path d="m12 4-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path></svg>`;
@@ -26,22 +27,15 @@ export const View = (() => {
     arr.forEach((todo) => {
       tmp += `
           <div class="todo-item">
-            <li class="todo-title">${todo.content}</li>
+            <li class="todo-title" contenteditable=${todo.isEditing}>${todo.content}</li>
             <li class="edit-button ${todo.id}"}>${editIcon}</li>
             <li class="delete-button ${todo.id}">${deleteIcon}</li>
             <li class="toggle-button ${todo.id}">${rightArrow}</li>           
           </div>
         `;
-
-      // tmp += `
-      //     <div class="todo-item">
-      //       <li class="todo-title">${todo.content}</li>
-      //       <li class="edit-button ${todo.id}"}>Edit</li>
-      //       <li class="delete-button ${todo.id}">Delete</li>
-      //       <li class="toggle-button ${todo.id}">></li>
-      //     </div>
-      //   `;
     });
+    // <li class="toggle-button ${todo.id}">${leftArrow}</li>
+
     return tmp;
   };
 
