@@ -49,12 +49,21 @@ export const Controller = ((model, view) => {
   const toggleTodo = () => {
     const contentEle = document.querySelector(view.domstr.content);
     contentEle.addEventListener("click", (event) => {
-      const [className, id] = event.target.className.split(" ");
+      const elementClicked = event.target;
+      const targetElement = elementClicked.matches("svg")
+        ? elementClicked.parentElement
+        : null;
+      if (!targetElement) return;
+
+      const [className, id] = targetElement.className.split(" ");
       const toggleClassName = view.domstr.togglebutton.slice(1);
+
       if (className === toggleClassName) {
         model.getTodos().then((todos) => {
           const todoToUpdate = todos.find((todo) => +todo.id === +id);
           todoToUpdate.isCompleted = !todoToUpdate.isCompleted;
+
+          // return;
           //update backend
           model.updateTodo(id, todoToUpdate);
           //re-render
@@ -69,7 +78,7 @@ export const Controller = ((model, view) => {
   const bootstrap = () => {
     init();
     addTodo();
-    deleteTodo();
+    // deleteTodo();
     toggleTodo();
   };
 
