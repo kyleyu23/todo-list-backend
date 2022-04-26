@@ -49,10 +49,9 @@ export const Controller = ((model, view) => {
   const toggleTodo = () => {
     const contentEle = document.querySelector(view.domstr.content);
     contentEle.addEventListener("click", (event) => {
-      const elementClicked = event.target;
-      const targetElement = elementClicked.matches("svg")
-        ? elementClicked.parentElement
-        : null;
+      // traverses the Element and its parents until it finds a node that matches the provided selector string
+      const targetElement = event.target.closest(".toggle-button");
+
       if (!targetElement) return;
 
       const [className, id] = targetElement.className.split(" ");
@@ -72,6 +71,8 @@ export const Controller = ((model, view) => {
       }
     });
   };
+
+  //UTILITY FUNCTIONS
 
   const editTodo = () => {};
 
