@@ -14,18 +14,17 @@ export const Controller = ((model, view) => {
   const addTodo = () => {
     const inputBox = document.querySelector(view.domstr.input);
     const submitButton = document.querySelector(view.domstr.submit);
+
     submitButton.addEventListener("click", (event) => {
       event.preventDefault();
 
       if (!inputBox.value) return;
 
       const newtodo = new model.Todo(inputBox.value);
+      //update backend
       model.addTodo(newtodo).then((todo) => {
-        if (todo.isCompleted) {
-          state.completedlist = [...state.completedlist, todo];
-        } else {
-          state.pendinglist = [...state.pendinglist, todo];
-        }
+        //re-render backend
+        state.todos = [...state.todos, todo];
       });
 
       inputBox.value = "";
@@ -33,27 +32,15 @@ export const Controller = ((model, view) => {
   };
 
   const deleteTodo = () => {
-    const pendingEle = document.querySelector(view.domstr.pending);
-    pendingEle.addEventListener("click", (event) => {
+    const contentEle = document.querySelector(view.domstr.content);
+    contentEle.addEventListener("click", (event) => {
       const [className, id] = event.target.className.split(" ");
       const deleteClassName = view.domstr.deletebutton.slice(1);
       if (className === deleteClassName) {
-        state.pendinglist = state.pendinglist.filter(
-          (todo) => +todo.id !== +id
-        );
+        //update backend
         model.deleteTodo(id);
-      }
-    });
-
-    const completedEle = document.querySelector(view.domstr.completed);
-    completedEle.addEventListener("click", (event) => {
-      const [className, id] = event.target.className.split(" ");
-      const deleteClassName = view.domstr.deletebutton.slice(1);
-      if (className === deleteClassName) {
-        state.completedlist = state.completedlist.filter(
-          (todo) => +todo.id !== +id
-        );
-        model.deleteTodo(id);
+        //re-render
+        state.todos = state.todos.filter((todo) => +todo.id !== +id);
       }
     });
   };
@@ -66,8 +53,10 @@ export const Controller = ((model, view) => {
         model.getTodos().then((todos) => {
           const todoToUpdate = todos.find((todo) => +todo.id === +id);
           todoToUpdate.isCompleted = !todoToUpdate.isCompleted;
+          //re-render
           state.todos = todos;
-          return model.updateTodo(id, todoToUpdate);
+          //update backend
+          model.updateTodo(id, todoToUpdate);
         });
       }
     });

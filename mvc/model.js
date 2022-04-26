@@ -41,9 +41,6 @@ export const Model = ((api, view) => {
 
       const completedTmp = view.createTmp(completedTodos);
       view.render(completedEle, completedTmp);
-
-      // const tmp = view.createTmp(this.todos);
-      // view.render(todosEle, tmp);
     }
   }
 

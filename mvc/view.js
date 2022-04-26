@@ -27,9 +27,9 @@ export const View = (() => {
       tmp += `
           <div class="todo-item">
             <li class="todo-title">${todo.content}</li>
-            <li class="edit-button">${editIcon}</li>
-            <li class="delete-button ${todo.id}">${deleteIcon}</li>
-            <li class="toggle-button ${todo.id}">${rightArrow}</li>
+            <li class="edit-button ${todo.id}"}>Edit</li>
+            <li class="delete-button ${todo.id}">Delete</li>
+            <li class="toggle-button ${todo.id}">></li>           
           </div>
         `;
     });
