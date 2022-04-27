@@ -71,9 +71,9 @@ export const Controller = ((model, view) => {
     contentEle.addEventListener("click", (event) => {
       const buttonEle = event.target.closest(view.domstr.editbutton);
       if (!buttonEle) return;
+      const [className, id] = buttonEle.className.split(" ");
 
       const titleEle = buttonEle.previousElementSibling;
-      const [className, id] = buttonEle.className.split(" ");
 
       //update state
       let newtodos = [...state.todos];
@@ -88,9 +88,6 @@ export const Controller = ((model, view) => {
       model.updateTodo(id, todoToUpdate);
     });
   };
-
-  //UTILITY FUNCTIONS
-  //TODO function to add eventlistener with params 1)view.domstr.class 2)callback
 
   const bootstrap = () => {
     init();

@@ -31,7 +31,7 @@ export const View = (() => {
             
             <li 
               class="todo-title" 
-              contenteditable=${todo.isEditing}
+              contenteditable=${todo.isEditing ?? false}             
             >
               ${todo.content}
             </li>
@@ -42,7 +42,7 @@ export const View = (() => {
           </div>
         `;
     });
-
+    // contenteditable=${todo.isEditing ?? false}
     return tmp;
   };
 
