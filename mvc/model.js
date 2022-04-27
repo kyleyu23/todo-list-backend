@@ -5,7 +5,6 @@ import { View } from "./view.js";
 export const Model = ((api, view) => {
   class Todo {
     constructor(content) {
-      this.userId = 3;
       this.content = content;
       this.isCompleted = false;
       this.isEditing = false;

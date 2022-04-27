@@ -27,14 +27,21 @@ export const View = (() => {
     arr.forEach((todo) => {
       tmp += `
           <div class="todo-item">
-            <li class="todo-title" contenteditable=${todo.isEditing}>${todo.content}</li>
+            <li class="toggle-button ${todo.id} left-arrow">${leftArrow}</li>
+            
+            <li 
+              class="todo-title" 
+              contenteditable=${todo.isEditing}
+            >
+              ${todo.content}
+            </li>
             <li class="edit-button ${todo.id}"}>${editIcon}</li>
-            <li class="delete-button ${todo.id}">${deleteIcon}</li>
-            <li class="toggle-button ${todo.id}">${rightArrow}</li>           
+            <li class="delete-button ${todo.id}">${deleteIcon}</li>    
+            
+            <li class="toggle-button ${todo.id} right-arrow">${rightArrow}</li>
           </div>
         `;
     });
-    // <li class="toggle-button ${todo.id}">${leftArrow}</li>
 
     return tmp;
   };

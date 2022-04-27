@@ -91,24 +91,29 @@ svg {
 .toggle-button {
   background-color: #4caf50;
 }
-.edit-button,
-.delete-button,
-.toggle-button,
-.todo-button {
+
+[class*="-button"] {
   cursor: pointer;
 }
+
 input,
 button,
 .content-container,
 .inner-container,
 .todo-item,
-.edit-button,
-.delete-button,
-.toggle-button,
+[class*="-button"],
 .todo-title[contenteditable="true"] {
   border-radius: 0.4rem;
 }
 .todo-title[contenteditable="true"] {
   border: 1px black solid;
   cursor: pointer;
+}
+
+.pending .left-arrow {
+  display: none;
+}
+
+.completed .right-arrow {
+  display: none;
 }
