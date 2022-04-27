@@ -55,14 +55,15 @@ export const Controller = ((model, view) => {
 
       const [className, id] = targetElement.className.split(" ");
 
-      model.getTodos().then((todos) => {
-        const todoToUpdate = todos.find((todo) => +todo.id === +id);
-        todoToUpdate.isCompleted = !todoToUpdate.isCompleted;
-        //update backend
-        model.updateTodo(id, todoToUpdate);
-        //re-render
-        state.todos = todos;
-      });
+      //update state
+      const newtodos = [...state.todos];
+
+      const todoToUpdate = newtodos.find((todo) => +todo.id === +id);
+      todoToUpdate.isCompleted = !todoToUpdate.isCompleted;
+      state.todos = newtodos;
+
+      //update backend
+      model.updateTodo(id, todoToUpdate);
     });
   };
 
@@ -76,7 +77,7 @@ export const Controller = ((model, view) => {
       const titleEle = buttonEle.previousElementSibling;
 
       //update state
-      let newtodos = [...state.todos];
+      const newtodos = [...state.todos];
 
       const todoToUpdate = newtodos.find((todo) => +todo.id === +id);
       todoToUpdate.isEditing = !todoToUpdate.isEditing;
