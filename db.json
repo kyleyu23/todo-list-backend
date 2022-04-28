@@ -1,0 +1,67 @@
+{
+  "todos": [
+    {
+      "content": "build three buttons for each todo task",
+      "isCompleted": true,
+      "id": 4
+    },
+    {
+      "content": "\n              \n              bind event handler for buttons\n            \n            ",
+      "isCompleted": true,
+      "id": 5,
+      "isEditing": false
+    },
+    {
+      "content": "\n              \n              \n              \n              \n              \n              \n              \n              \n              \n              \n              \n              \n              \n              \n              \n              \n              \n              \n              \n              there should be totally 5 http requests\n            \n            \n            \n            \n            \n            \n            \n            \n            \n            \n            \n            \n            \n            \n            \n            \n            \n            \n            \n            ",
+      "isCompleted": true,
+      "id": 7,
+      "isEditing": false
+    },
+    {
+      "content": "\n              Get to-do data from json server at the beginning \n            ",
+      "isCompleted": false,
+      "id": 8,
+      "isEditing": false
+    },
+    {
+      "content": "CRUD operation should be performed for all 4 buttons",
+      "isCompleted": true,
+      "id": 9
+    },
+    {
+      "content": "Apply some style as you like",
+      "isCompleted": false,
+      "id": 11
+    },
+    {
+      "content": "\n              \n              give some thought about the data structure\n            \n            ",
+      "isCompleted": false,
+      "id": 12,
+      "isEditing": false
+    },
+    {
+      "content": "\n              \n              what's more than the original to-do list!!!!!\n            \n            ",
+      "isCompleted": false,
+      "id": 13,
+      "isEditing": false
+    },
+    {
+      "content": "\n              \n              Make a symmetrical layout\n            \n            ",
+      "isCompleted": false,
+      "id": 14,
+      "isEditing": false
+    },
+    {
+      "content": "\n              \n              Functional first, stylish second\n            \n            ",
+      "isCompleted": false,
+      "id": 15,
+      "isEditing": false
+    },
+    {
+      "content": "\n              \n              \n              \n              \n              \n              ddd",
+      "isCompleted": false,
+      "isEditing": false,
+      "id": 16
+    }
+  ]
+}
